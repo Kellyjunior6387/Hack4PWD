@@ -18,3 +18,27 @@ class UserSerializer(serializers.ModelSerializer):
             last_name=validated_data.get('last_name', '')
         )
         return user
+
+#serializer for user registration
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User()  
+        fields = ('username', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = get_user_model().objects.create(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=make_password(validated_data['password'])
+        )
+        return user
+    
+    # Custom serializer for JWT login
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Add custom claims
+        token['username'] = user.username
+        return token
