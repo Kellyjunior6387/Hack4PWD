@@ -7,6 +7,9 @@ from .serializers import UserSerializer
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
+from .models import CustomUser
 
 
 # API View for user registration
@@ -31,3 +34,11 @@ class RegisterView(APIView):
 # Login view using JWT
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+# Profile view for retrieving and updating user info
+class ProfileView(generics.RetrieveUpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user  # Returns the current authenticated user
