@@ -1,0 +1,48 @@
+/* src/components/LandingPage.css */
+.landing-page {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero {
+  background-color: #f4f4f9;
+  padding: 3rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.cta-buttons button {
+  padding: 1rem 2rem;
+  margin: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.features, .how-it-works {
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.footer nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+}
