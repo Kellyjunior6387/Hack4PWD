@@ -10,10 +10,9 @@ const Login = () => {
     const handleLogin = async (e)=> {
         e.preventDefault();
         try {
-            const { data } = awa
+            const { data } = await 
         }
-
-    }
+    };
 
   return (
     <div>
