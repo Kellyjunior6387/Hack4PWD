@@ -5,8 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserSerializer
 from django.contrib.auth.models import User
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-# Create your views here.
 
 # API View for user registration
 class RegisterView(APIView):
@@ -27,3 +28,6 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# Login view using JWT
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
