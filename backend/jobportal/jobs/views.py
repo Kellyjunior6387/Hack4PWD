@@ -7,6 +7,7 @@ from rest_framework import status
 from .serializers import JobSerializer, JobDetailSerializer, JobCreateSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
 class JobListAPIView(APIView):
     def get(self, request):
@@ -22,19 +23,19 @@ class JobDetailAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class JobCreateAPIView(APIView):
-    #permission_classes = [IsAuthenticated]  # Restrict access to authenticated users only
-    """"""
-    def post(self, request):
-        # Ensure the user is an employer
-        #if request.user.role != 'employer':
-        #  return Response({'error': 'Only employers can create jobs.'}, status=status.HTTP_403_FORBIDDEN)
+    # Remove authentication requirement for now
+    # permission_classes = [IsAuthenticated]
 
-        # Set employer field to the logged-in user
+    def post(self, request):
         serializer = JobCreateSerializer(data=request.data)
+
         if serializer.is_valid():
-            serializer.save(employer=request.user)  # Pass the employer field as the logged-in user
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
+            job = serializer.save()  # This will call the create method in JobCreateSerializer
+            return Response(JobCreateSerializer(job).data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
 
 class JobSearchAPIView(APIView):
     def get(self, request):
@@ -48,8 +49,11 @@ class JobSearchAPIView(APIView):
             jobs = jobs.filter(title__icontains=title_query)  # Search for title (case insensitive)
 
         if tag_query:
-            print(tag_query)
-            jobs = jobs.filter(accessibility_tags__icontains=tag_query)  # Filter by accessibility tags
+            # Build a query to check if any tag in tag_query is in accessibility_tags
+            tag_filters = Q()
+            for tag in tag_query:
+                tag_filters |= Q(accessibility_tags__icontains=tag)
+            jobs = jobs.filter(tag_filters)
 
         serializer = JobSerializer(jobs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

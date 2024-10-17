@@ -9,7 +9,7 @@ class JobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ['employer_name', 'status', 'title', 'type','accessibility_tags']
+        fields = ['id','employer_name', 'status', 'title', 'type','accessibility_tags']
 
 
 
@@ -23,7 +23,7 @@ class JobCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Job
-        fields = ['title', 'description_id', 'type', 'status']
+        fields = ['title', 'description_id', 'type', 'status','accessibility_tags','employer']
 
     def create(self, validated_data):
         job = Job.objects.create(**validated_data)
