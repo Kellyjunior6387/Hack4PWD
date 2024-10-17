@@ -22,12 +22,12 @@ class JobDetailAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class JobCreateAPIView(APIView):
-    permission_classes = [IsAuthenticated]  # Restrict access to authenticated users only
-
+    #permission_classes = [IsAuthenticated]  # Restrict access to authenticated users only
+    """"""
     def post(self, request):
         # Ensure the user is an employer
-        if request.user.role != 'employer':
-            return Response({'error': 'Only employers can create jobs.'}, status=status.HTTP_403_FORBIDDEN)
+        #if request.user.role != 'employer':
+        #  return Response({'error': 'Only employers can create jobs.'}, status=status.HTTP_403_FORBIDDEN)
 
         # Set employer field to the logged-in user
         serializer = JobCreateSerializer(data=request.data)
@@ -48,7 +48,9 @@ class JobSearchAPIView(APIView):
             jobs = jobs.filter(title__icontains=title_query)  # Search for title (case insensitive)
 
         if tag_query:
-            jobs = jobs.filter(accessibility_tags__tag__in=tag_query).distinct()  # Filter by accessibility tags
+            print(tag_query)
+            jobs = jobs.filter(accessibility_tags__icontains=tag_query)  # Filter by accessibility tags
 
         serializer = JobSerializer(jobs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
