@@ -125,8 +125,8 @@ The API supports the following functionalities:
 **Description**: Search for a job title or specific tags.
 
 **Parameters**
-**title (string, optional)**: Job title to search for (partial matches allowed).
-**tags (array, optional)**: List of accessibility tags to filter jobs by.
+- **title (string, optional)**: Job title to search for (partial matches allowed).
+- **tags (array, optional)**: List of accessibility tags to filter jobs by.
 
 #### Response
 
