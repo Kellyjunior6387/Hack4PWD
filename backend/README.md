@@ -42,7 +42,6 @@ The API supports the following functionalities:
         "location": "Remote",
         "posted_at": "2024-10-15"
     },
-    ...
 ]
 
 ### 2. Job Detail
