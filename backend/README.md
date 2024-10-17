@@ -1,1 +1,80 @@
+# Job API Documentation
+
+This is the documentation for the Job API, providing a set of endpoints for creating, retrieving, and searching job listings.
+
+## Overview
+
+The API supports the following functionalities:
+- Listing all jobs
+- Retrieving detailed information about a specific job
+- Creating a new job listing (for employers only)
+- Searching for jobs by title and accessibility tags
+
+---
+
+## Table of Contents
+
+1. [Job List](#1-job-list)
+2. [Job Detail](#2-job-detail)
+3. [Job Creation](#3-job-creation)
+4. [Job Search](#4-job-search)
+
+---
+
+### 1. Job List
+
+**Endpoint**: `/api/jobs/`  
+**Method**: `GET`  
+**Description**: Retrieve a list of all job listings.
+
+#### Response
+
+- **Status Code**: `200 OK`
+- **Body**: A JSON array of job objects.
+
+```json
+[
+    {
+        "id": 1,
+        "title": "Software Developer",
+        "description": "Develop and maintain web applications.",
+        "employer": "Company ABC",
+        "location": "Remote",
+        "posted_at": "2024-10-15"
+    },
+    ...
+]
+
+### 2. Job Detail
+
+**Endpoint**: `/api/jobs/<job_id>/`  
+**Method**: `GET`  
+**Description**: Retrieve detailed information about a specific job by its ID.
+
+**Parameters**
+**job_id (required)**: Retrieve detailed information about a specific job by its ID.
+
+#### Response
+
+- **Status Code**: `200 OK` if job exist;
+- **Status Code**: `404 Not Found` if job does not exist;
+
+- **Body**: A JSON array of job objects.
+
+
+
+```json
+[
+ {
+    "id": 1,
+    "title": "Software Developer",
+    "description": "Develop and maintain web applications.",
+    "employer": "Company ABC",
+    "location": "Remote",
+    "accessibility_tags": ["remote", "flexible hours"],
+    "posted_at": "2024-10-15"
+}
+,
+    ...
+]
 
