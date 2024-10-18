@@ -92,7 +92,6 @@ export const Home = () => {
                        
                     </div>
 
-
                     <div className='pt-[8rem] md:px-[1rem] px-[0rem] w-full'>
     <div className='titleT pb-6 text-2xl'>
         <p className='titleT'>Current Listings</p>

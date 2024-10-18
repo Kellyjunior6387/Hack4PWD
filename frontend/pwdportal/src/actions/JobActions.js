@@ -18,6 +18,7 @@ export const createJobPost = (jobData) => async (dispatch) => {
         }
 
         const {data} = await axios.post("",jobData,config) ;        
+        const {data} = await axios.post("",jobData,config) ;        
 
         dispatch(newPostSuccess()) ;
         toast.success("Job posted successfully !")
