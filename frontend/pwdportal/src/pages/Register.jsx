@@ -139,49 +139,11 @@ export const Register = () => {
                 </div>
               </div>
 
-              {/* Profile */}
-              <div>
-                <div className='bg-white flex justify-center items-center'>
-                  <div className='text-gray-600 px-2'>
-                   {avatar.length === 0 ? <CgProfile size={20} />
-                   : <img src={avatar} className='w-[3em] h-[2.5em]'/> 
-                   }
-                  </div>
-                  <label htmlFor='avatar' className='outline-none w-full cursor-pointer text-black px-1 pr-3 py-2 '>
-                    {avatarName.length === 0 ? <span className='text-gray-500 font-medium'>Select Profile Pic...</span>
-                      : avatarName}
-                  </label>
-                  <input id='avatar' name='avatar' required
-                    onChange={avatarChange}
-                    placeholder='Profile' accept="image/*" type="file" className='outline-none  w-full hidden text-black px-1 pr-3 py-2' />
-
-
-                </div>
-                <p className='bg-gray-950 text-white text-xs'>Please select Image file</p>
-              </div>
-
-
-              {/* Resume */}
-              <div>
-                <div className='bg-white flex justify-center items-center'>
-                  <div className='text-gray-600 px-2'>
-                    <BsFileEarmarkText size={20} />
-                  </div>
-                  <label className='outline-none w-full text-black px-1 pr-3 py-2' htmlFor="resume">
-                    {resumeName.length === 0 ? <span className='text-gray-500 cursor-pointer font-medium'>Select Resume...</span> : resumeName}
-                  </label>
-                  <input required
-                    onChange={resumeChange}
-                    placeholder='Resume' id='resume' name='resume' accept="image/*" type="file" className='outline-none hidden w-full text-black px-1 pr-3 py-2' />
-                </div>
-              </div>
-
-              {/* Skills */}
+              {/* Type of disability */}
               <div className='bg-white flex justify-center items-center'>
                 <div className='text-gray-600 md:pb-12 pb-8 px-2'>
-                  <MdOutlineFeaturedPlayList size={20} />
                 </div>
-                <textarea value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Add skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
+                <textarea value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Type of disability' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
               </div>
 
 

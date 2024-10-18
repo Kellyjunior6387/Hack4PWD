@@ -22,7 +22,7 @@ export const Home = () => {
 
 
 
-    // Update the data to reflect accessibility aids
+    // Updated the data to reflect accessibility aids
     const data = [
         {
             link: "/images/Accessibility/Mobility-aids.jpg",
@@ -69,12 +69,7 @@ export const Home = () => {
         return `${day}-${month}-${year}`;
     }
 
-
     return (
-
-
-
-
         <>
             <MetaData title="AjiraBora" />
             <div className='min-h-screen md:px-20 px-3  pt-14 flex   text-white bg-gray-950'>
@@ -88,7 +83,7 @@ export const Home = () => {
                         </div>
                     </div>
                     <div>
-                        <p className='md:text-xl text-sm'>Empowering <span className='text-yellow-500'>Ability</span>, Connecting Opportunity.</p>
+                        <p className='md:text-xl text-sm'>Empowering <span className='text-white-500'>Ability</span>, Connecting Opportunity.</p>
                        
                     </div>
 
@@ -141,37 +136,35 @@ export const Home = () => {
 
 <div className='pt-20 flex flex-col gap-4 md:px-[1rem] px-[1rem] '>
     <div className='text-2xl titleT'>
-        Accessibility Features
+        Companies on our site
     </div>
-
 
     {/* Buttons for Employers and Job Seekers */}
     <div className='flex gap-6 mt-4'>
         <Link to="/jobs">
-            <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300'>
+            <button className='bg-blue-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300'>
                 Employers
             </button>
         </Link>
         <Link to="/jobs">
-            <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300'>
+            <button className='bg-blue-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300'>
                 Job Seekers
             </button>
         </Link>
     </div>
 
-
-    {/* Displaying Accessibility Features */}
-    <div className='pt-20 flex flex-col gap-4 md:px-[1rem] px-[1rem] '>
+    {/* Displaying Company Logos */}
+    <div className="flex flex-wrap gap-3 mt-6">
         {
             data.map((e, i) => (
-                <div key={i} className="flex flex-col items-center">
-                    <img src={e.link} className='w-[6rem]' alt={e.feature} title={e.feature} />
-                    <p className="text-center text-lg mt-2">{e.feature}</p>
+                <div key={i}>
+                    <img src={e.link} className='w-[4rem]' alt={e.companyName} title={e.companyName} />
                 </div>
             ))
         }
     </div>
 </div>
+
                     <Testimonials />
                    
                     <div className="pt-[7rem] pb-[10rem] md:px-[14rem] px-[1rem]   text-center">

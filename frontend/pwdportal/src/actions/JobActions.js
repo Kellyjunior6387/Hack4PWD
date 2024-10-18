@@ -16,8 +16,7 @@ export const createJobPost = (jobData) => async (dispatch) => {
                 Authorization: `Bearer ${localStorage.getItem('userToken')}`
             } 
         }
-
-        const {data} = await axios.post("",jobData,config) ;        
+       
         const {data} = await axios.post("",jobData,config) ;        
 
         dispatch(newPostSuccess()) ;
