@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '12345'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ajirabora.onrender.com']
+ALLOWED_HOSTS = ['ajirabora.onrender.com', '127.0.0.1']
 
 #CRSF_TRUSTED_ORIGINS = ['ajirabora-fmcsbffnetdgggfw.eastus2-01.azurewebsites.net']
 # Application definition
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['ajirabora.onrender.com']
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'jobs.apps.JobsConfig',
+    'corsheaders',
     #'application.apps.ApplicationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware','
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -86,8 +88,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a/ajirabora')
-
+DATABASES['default'] = dj_database_url.parse('postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a.oregon-postgres.render.com/ajirabora')
 
 
 # Password validation
@@ -130,3 +131,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOW_ALL_ORIGINS = True
