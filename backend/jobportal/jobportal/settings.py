@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,19 +22,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4cze58@4o@d#v^+3j-u(bb=zi0$tf^m-vjs-c6dy1o7#psa!__'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ajirabora.onrender.com', '127.0.0.1']
 
-
+#CRSF_TRUSTED_ORIGINS = ['ajirabora-fmcsbffnetdgggfw.eastus2-01.azurewebsites.net']
 # Application definition
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'jobs.apps.JobsConfig',
+    'corsheaders',
     #'application.apps.ApplicationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,10 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,6 +87,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+DATABASES['default'] = dj_database_url.parse('postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a/ajirabora')
+
 
 
 # Password validation
@@ -125,3 +132,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOW_ALL_ORIGINS = True

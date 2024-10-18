@@ -22,7 +22,7 @@ class User(models.Model):
     name = models.CharField(max_length=100)
     password = models.CharField(max_length=255)  # Password will be hashed
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
-    disability_type = models.CharField(max_length=20, choices=DISABILITY_CHOICES, null=True, blank=True)
+    disability_type = models.CharField(max_length=20, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
