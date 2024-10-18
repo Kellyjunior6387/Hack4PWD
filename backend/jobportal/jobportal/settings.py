@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '12345'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware','
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,7 +88,8 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a.oregon-postgres.render.com/ajirabora')
+DATABASES['default'] = dj_database_url.parse('postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a/ajirabora')
+
 
 
 # Password validation
