@@ -17,7 +17,7 @@ export const createJobPost = (jobData) => async (dispatch) => {
             } 
         }
 
-        const {data} = await axios.post("https://joblane-backend.onrender.com/api/v1/create/job",jobData,config) ;        
+        const {data} = await axios.post("",jobData,config) ;        
 
         dispatch(newPostSuccess()) ;
         toast.success("Job posted successfully !")
@@ -31,7 +31,8 @@ export const getAllJobs = () => async (dispatch) => {
     try{
         dispatch(allJobsRequest()) ;
 
-        const {data} = await axios.get("https://joblane-backend.onrender.com/api/v1/jobs") ;
+        const {data} = await axios.get("https://ajirabora.onrender.com/api/jobs/") ;
+        console.log(data);
 
         dispatch(allJobsSuccess(data.Jobs)) ;
 
@@ -45,7 +46,7 @@ export const getSingleJob = (id) => async (dispatch) => {
     try{
         dispatch(jobDetailsRequest()) ;
 
-        const {data} = await axios.get(`https://joblane-backend.onrender.com/api/v1/job/${id}`) ;
+        const {data} = await axios.get(`${id}`) ;
 
         dispatch(jobDetailsSuccess(data.job)) ;
 
@@ -67,7 +68,7 @@ export const saveJob = (id) => async (dispatch) => {
 
         
         
-        const {data} = await axios.get(`https://joblane-backend.onrender.com/api/v1/saveJob/${id}`,config) ;
+        const {data} = await axios.get(`${id}`,config) ;
 
         dispatch(me())
         dispatch(jobSaveSuccess()) ;
@@ -91,7 +92,7 @@ export const getSavedJobs = () => async (dispatch) => {
         }
 
 
-        const {data} = await axios.get("https://joblane-backend.onrender.com/api/v1/getSavedJobs",config) ;
+        const {data} = await axios.get("",config) ;
 
         dispatch(getSavedJobsSuccess(data))
 

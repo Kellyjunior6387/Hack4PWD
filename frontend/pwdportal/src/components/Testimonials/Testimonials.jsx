@@ -2,29 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import testimonials from './testimonials';
 
+
 function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const itemsPerPage = isSmallScreen ? 1 : 3;
+
 
   useEffect(() => {
     const checkScreenSize = () => {
       setIsSmallScreen(window.innerWidth < 768);
     };
 
+
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
 
+
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
+
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   };
 
+
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   };
+
 
   const getVisibleTestimonials = () => {
     const end = currentIndex + itemsPerPage;
@@ -34,6 +41,7 @@ function Testimonials() {
     return testimonials.slice(currentIndex, end);
   };
 
+
   return (
     <div className='pt-20 flex flex-col gap-4 md:px-[1rem] px-[1rem]'>
       <div className='text-2xl titleT'>
@@ -41,8 +49,8 @@ function Testimonials() {
       </div>
       <div className='relative w-full flex justify-center items-center'>
         <div className='absolute left-[-30px] top-1/2 transform -translate-y-1/2'>
-          <button 
-            onClick={handlePrev} 
+          <button
+            onClick={handlePrev}
             className='bg-transparent text-white p-2 rounded-full z-10 hover:bg-gray-700 transition duration-300'
           >
             {/* React Icons Left Arrow */}
@@ -68,8 +76,8 @@ function Testimonials() {
           </div>
         </div>
         <div className='absolute right-[-35px] top-1/2 transform -translate-y-1/2'>
-          <button 
-            onClick={handleNext} 
+          <button
+            onClick={handleNext}
             className='bg-transparent text-white p-2 rounded-full z-10 hover:bg-gray-700 transition duration-300'
           >
             {/* React Icons Right Arrow */}
@@ -80,5 +88,6 @@ function Testimonials() {
     </div>
   );
 }
+
 
 export default Testimonials;

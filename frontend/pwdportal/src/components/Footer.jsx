@@ -78,7 +78,7 @@ export const Footer = () => {
             <Link
               target="_blank"
               className="underline text-blue-400"
-              to="https://sujal-tangde.netlify.app/"
+              to="https://github.com/Kellyjunior6387/Hack4PWD/"
             >
               Tech Titans
             </Link>

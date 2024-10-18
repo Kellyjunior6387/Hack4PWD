@@ -174,7 +174,6 @@ export const Register = () => {
                     onChange={resumeChange}
                     placeholder='Resume' id='resume' name='resume' accept="image/*" type="file" className='outline-none hidden w-full text-black px-1 pr-3 py-2' />
                 </div>
-                <p className='bg-gray-950 text-white text-xs'>Please select Image file</p>
               </div>
 
               {/* Skills */}
@@ -182,7 +181,7 @@ export const Register = () => {
                 <div className='text-gray-600 md:pb-12 pb-8 px-2'>
                   <MdOutlineFeaturedPlayList size={20} />
                 </div>
-                <textarea value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
+                <textarea value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Add skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
               </div>
 
 
