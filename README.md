@@ -3,7 +3,7 @@
 
 Welcome to the **PWD Job Application Platform**, an innovative solution that connects Persons with Disabilities (PWD) with inclusive employers. This platform provides accessible job search tools for PWD and supports employers in creating inclusive hiring practices.
 
-[![Pitch link video](https://www.loom.com/share/108be04041b24e2ab8338bc9cfacbc82?sid=e44a4e27-c481-4cb6-9d81-5ff4efc42c82)]
+[[Pitch link video](https://www.loom.com/share/108be04041b24e2ab8338bc9cfacbc82?sid=e44a4e27-c481-4cb6-9d81-5ff4efc42c82)]
 
 
 ## **Table of Contents**
