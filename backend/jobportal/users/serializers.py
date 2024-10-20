@@ -15,6 +15,14 @@ class UserSerializer(serializers.ModelSerializer):
             'username': {'required': True},
         }
 
+    def validate_username(self, value):
+        """
+        Check if the username already exists and raise a validation error.
+        """
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("Username already exists")
+        return value
+    
     def create(self, validated_data):
         user = User(
             email=validated_data['email'],

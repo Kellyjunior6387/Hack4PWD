@@ -62,7 +62,24 @@ class UserViewSet(APIView):
     """
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
+
     def get(self, request):
             user = request.user
             serializer = UserViewSerializer(user)
+
             return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+
+class UserLogoutView(APIView):
+    """
+    Handles user logout by deleting the user's authentication token.
+    """
+    permission_classes = [IsAuthenticated]  # Ensure the user is authenticated
+    authentication_classes = [TokenAuthentication]  # Use Token Authentication
+
+    def post(self, request, *args, **kwargs):
+        try:
+            # Delete the token associated with the authenticated user
+            request.user.auth_token.delete()
+            return Response({"message": "Successfully logged out."}, status=status.HTTP_200_OK)
+        except:
+            return Response({"error": "Something went wrong while logging out."}, status=status.HTTP_400_BAD_REQUEST)
