@@ -6,16 +6,20 @@ from .models import Job
 from rest_framework import status
 from .serializers import JobSerializer, JobDetailSerializer, JobCreateSerializer
 from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.db.models import Q
 
 class JobListAPIView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self, request):
         jobs = Job.objects.all()  # Fetch all Job 
         serializer = JobSerializer(jobs, many=True)  # Serialize all job entries
         return Response(serializer.data)  # Return serialized data as JSON response
     
 class JobDetailAPIView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self, request, job_id):
         # Use get_object_or_404 to fetch the job or return a 404 if not found
         job = get_object_or_404(Job, id=job_id)
@@ -23,21 +27,22 @@ class JobDetailAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class JobCreateAPIView(APIView):
-    # Remove authentication requirement for now
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = JobCreateSerializer(data=request.data)
-
+        if request.user.role != 'employer':
+            return Response({'error': 'Only employers can create jobs.'}, status=status.HTTP_403_FORBIDDEN)
+        serializer = JobCreateSerializer(data=request.data,  context={'request': request})
         if serializer.is_valid():
-            job = serializer.save()  # This will call the create method in JobCreateSerializer
-            return Response(JobCreateSerializer(job).data, status=status.HTTP_201_CREATED)
-        
+            serializer.save()  # Pass the employer field as the logged-in user
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
 
 class JobSearchAPIView(APIView):
+    permission_classes = [AllowAny]
+    
     def get(self, request):
         title_query = request.query_params.get('title', None)
         tag_query = request.query_params.getlist('tags')  # Expecting a list of tags
