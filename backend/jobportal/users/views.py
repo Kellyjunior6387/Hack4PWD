@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from .models import User
-from .serializers import UserSerializer, UserLoginSerializer
+from .serializers import UserSerializer, UserLoginSerializer, UserViewSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -35,6 +35,7 @@ class UserLoginView(APIView):
     Handles user login and returns a token if authentication is successful.
     """
     permission_classes = [AllowAny]
+
     def post(self, request, *args, **kwargs):
         serializer = UserLoginSerializer(data=request.data, context={'request': request})
         
@@ -54,3 +55,14 @@ class UserLoginView(APIView):
         
         # If validation fails, return the error messages
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserViewSet(APIView):
+    """
+    This retrieves user information using the token sent with the request
+    """
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    def get(self, request):
+            user = request.user
+            serializer = UserViewSerializer(user)
+            return JsonResponse(serializer.data, status=status.HTTP_200_OK)

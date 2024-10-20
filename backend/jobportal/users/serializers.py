@@ -8,17 +8,21 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['username', 'email', 'password','first_name','last_name','role','disability_type']
         extra_kwargs = {
             'password': {'write_only': True},
+            'email': {'required': True},
+            'username': {'required': True},
         }
 
     def create(self, validated_data):
         user = User(
             email=validated_data['email'],
             username=validated_data['username'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
+            first_name=validated_data.get('first_name',''),
+            last_name=validated_data.get('last_name', ''),
+            role=validated_data.get('role', ''),
+            disability_type=validated_data.get('disability_type', '')
         )
         user.set_password(validated_data['password'])
         user.save()
@@ -42,3 +46,8 @@ class UserLoginSerializer(serializers.Serializer):
 
         data['user'] = user
         return data
+
+class UserViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name','last_name','username','role','disability_type']
