@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', '12345')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -87,8 +88,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-DATABASES['default'] = dj_database_url.parse('postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a/ajirabora')
+internal_Db_string = 'postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a/ajirabora'
+external_Db_String = 'postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a.oregon-postgres.render.com/ajirabora'
+DATABASES['default'] = dj_database_url.parse(external_Db_String)
 
 
 
@@ -134,3 +136,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
