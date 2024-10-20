@@ -1,8 +1,9 @@
 from django.db import models
 # users/models.py
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
-class User(models.Model):
+class User(AbstractUser):
     """Model to implement a jobseeker or employer"""
     ROLE_CHOICES = [
         ('job_seeker', 'Job Seeker'),
@@ -17,13 +18,13 @@ class User(models.Model):
         ('bipolar', 'Bipolar'),
     ]
 
-    id = models.AutoField(primary_key=True)  # Auto-incremented ID
-    email = models.EmailField(unique=True)  # Unique email for each user
-    name = models.CharField(max_length=100)
-    password = models.CharField(max_length=255)  # Password will be hashed
+    #id = models.AutoField(primary_key=True)  # Auto-incremented ID
+    #email = models.EmailField(unique=True)  # Unique email for each user
+    #name = models.CharField(max_length=100)
+    #password = models.CharField(max_length=255)  # Password will be hashed
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     disability_type = models.CharField(max_length=20, null=True, blank=True)
-    created_at = models.DateTimeField(default=timezone.now)
+    #created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
