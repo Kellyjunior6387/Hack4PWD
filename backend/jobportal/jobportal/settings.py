@@ -90,7 +90,7 @@ DATABASES = {
 }
 internal_Db_string = 'postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a/ajirabora'
 external_Db_String = 'postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a.oregon-postgres.render.com/ajirabora'
-DATABASES['default'] = dj_database_url.parse(external_Db_String)
+DATABASES['default'] = dj_database_url.parse(internal_Db_string)
 
 
 
