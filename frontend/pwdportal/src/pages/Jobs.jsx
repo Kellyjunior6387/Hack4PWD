@@ -16,7 +16,8 @@ export const Jobs = () => {
 
 
   const dispatch = useDispatch()
-  const { allJobs, loading } = useSelector(state => state.job)
+  //const { allJobs, loading } = useSelector(state => state.job)
+  const { allJobs = [], loading } = useSelector(state => state.job);
 
 
   const [baseJobs, setBaseJobs] = useState([]); // New state for base jobs
@@ -46,7 +47,7 @@ export const Jobs = () => {
   ]
 
 
-  console.log(allJobs.length)
+  //console.log(allJobs)
 
 
   useEffect(() => {
@@ -145,6 +146,8 @@ export const Jobs = () => {
 
 
   const itemsPerPage = 5;
+  console.log(allJobs)
+  console.log(baseJobs)
 
   const totalPageCount = Math.ceil(jobs.length / itemsPerPage);
 

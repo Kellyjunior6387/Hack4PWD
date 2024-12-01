@@ -33,8 +33,8 @@ export const getAllJobs = () => async (dispatch) => {
 
         const {data} = await axios.get("https://ajirabora.onrender.com/api/jobs/") ;
         console.log(data);
-
-        dispatch(allJobsSuccess(data.Jobs)) ;
+        //const titles = jobs.map(job => job.title);
+        dispatch(allJobsSuccess(data)) ;
 
     }catch(err){
         dispatch(allJobsFail(err.response.data.message))   
