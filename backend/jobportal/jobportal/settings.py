@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '12345')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = ['ajirabora.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = ['ajirabora.onrender.com', '127.0.0.1', 'localhost']
 
 #CRSF_TRUSTED_ORIGINS = ['ajirabora-fmcsbffnetdgggfw.eastus2-01.azurewebsites.net']
 # Application definition
@@ -88,8 +88,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-internal_Db_string = 'postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a/ajirabora'
-external_Db_String = 'postgresql://nyams:eIn9Ask641QYZKRTjnM8u5nbQ7FUGjG5@dpg-cs958m3qf0us738jinp0-a.oregon-postgres.render.com/ajirabora'
+internal_Db_string = 'postgresql://nyams:R9zs4ZTTKtAYo9Q2xmjH8NNExrkgf1oN@dpg-ct61nhrqf0us738ano0g-a/ajirabora_9165'
+external_Db_String = 'postgresql://nyams:R9zs4ZTTKtAYo9Q2xmjH8NNExrkgf1oN@dpg-ct61nhrqf0us738ano0g-a.oregon-postgres.render.com/ajirabora_9165'
 DATABASES['default'] = dj_database_url.parse(internal_Db_string)
 
 
